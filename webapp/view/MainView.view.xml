@@ -1,7 +1,86 @@
 <mvc:View controllerName="zmmmaterialkit.controller.MainView"
+    xmlns:f="sap.f"   
+    xmlns:t="sap.ui.table"
+    xmlns:smt="sap.ui.comp.smarttable"
+    xmlns:core="sap.ui.core" 
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+     <f:DynamicPage id="dynamicPage" fitContent="true">
+     <f:header>
+             <f:DynamicPageHeader id="dynamicHeader">
+                 <Toolbar id="toolbarUp">
+                        <MultiInput id="vkorgInput" placeholder="Sales Organization" showSuggestion="true" suggestionItems="{/vkorgSet}" showValueHelp="true" valueHelpRequest=".onValueHelpRequestOda" submit="onValueHelpCloseOda">
+                            <suggestionItems>
+                                <core:Item id="vkorg" text="{vkorg_sel}" />
+                            </suggestionItems>
+                        </MultiInput>
+                        <MultiInput id="vtwegInput" placeholder="Distribution Channel" showSuggestion="true" suggestionItems="{/vtwegSet}" showValueHelp="true" valueHelpRequest=".onValueHelpRequestMat" submit="onValueHelpCloseMat">
+                            <suggestionItems>
+                                <core:Item id="vtweg" text="{vtweg_sel}" />
+                            </suggestionItems>
+                        </MultiInput>
+                        <MultiInput id="werksInput" placeholder="Plant" showSuggestion="true" suggestionItems="{/werksSet}" showValueHelp="true" valueHelpRequest=".onValueHelpRequestSup" submit="onValueHelpCloseSup">
+                            <suggestionItems>
+                                <core:Item id="werks" text="{werks_sel}" />
+                            </suggestionItems>
+                        </MultiInput>
+                        <CheckBox id="test" text="Test Run"/>
+                        <Button id="elab" text="Elaborate" press="onPress"/>
+                  </Toolbar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <t:Table id="mainTable"
+            selectionMode="Multi"
+            ariaLabelledBy="title"
+            visibleRowCountMode="Auto"
+            visible="false"
+            rows="{/ReultablSet}">
+                <t:columns>
+                    <t:Column id="col1">
+                        <Label id="stat" text="Status"/>
+                        <t:template>
+                            <Text text="{status}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="col2">
+                        <Label id="mat" text="Material"/>
+                        <t:template>
+                            <Text id ="tex" text="{matnr}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="col3">
+                        <Label id="desc" text="Description"/>
+                        <t:template>
+                            <Text text="{maktx}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Plant"/>
+                        <t:template>
+                            <Text text="{werks}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Distribution channel"/>
+                        <t:template>
+                            <Text text="{vtweg}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Sales organization"/>
+                        <t:template>
+                            <Text text="{vkorg}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Message"/>
+                        <t:template>
+                            <Text text="{message}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </f:content>
+      </f:DynamicPage >
 </mvc:View>
